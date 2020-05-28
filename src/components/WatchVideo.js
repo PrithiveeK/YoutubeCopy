@@ -21,7 +21,7 @@ class WatchVideo extends Component {
         this.props.loader[0]();
         const apiURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet';
         const videoIdPrams = `&&id=${this.videoId}`;
-        const key = `&&key=AIzaSyAH4EKzZI6NooXKYNkPYGhW7csAPWS-0fk`;
+        const key = `&&key=${process.env.REACT_APP_YOUTUBE_API}`;
         const res = await fetch(apiURL+videoIdPrams+key,
             {header: {'Content-Type': 'application/json'}});
         const result = await res.json();

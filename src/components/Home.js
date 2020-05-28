@@ -27,7 +27,7 @@ class Home extends Component {
         this.startLoading();
         const apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&&type=video';
         const queryPram = query ? `&&q=${query.replace(/\ /g,'+')}` : '';
-        const key = `&&key=AIzaSyAH4EKzZI6NooXKYNkPYGhW7csAPWS-0fk`;
+        const key = `&&key=${process.env.REACT_APP_YOUTUBE_API}`;
         const res = await fetch(apiURL+queryPram+key,
         {header: {'Content-Type': 'application/json'}});
         const result = await res.json();
