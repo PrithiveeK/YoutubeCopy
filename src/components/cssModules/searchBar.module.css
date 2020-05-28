@@ -1,0 +1,20 @@
+.top-bar{
+    display: flex;
+    height: 60px;
+    align-items: center;
+    justify-content: space-between;
+}
+.youtube{
+    margin: 0 10px;
+}
+.query-form{
+    display: flex;
+    width: min(500px,60%);
+}
+.empty{
+    width: 15%;
+}
+.query-input{
+    flex: 1;
+    height: 25px;
+}

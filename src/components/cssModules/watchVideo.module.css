@@ -1,0 +1,32 @@
+.object{
+    width: 800px;
+    height: 500px;
+    margin: 10px auto;
+}
+.body-container{
+    display: flex;
+    margin-top: 20px;
+}
+.watcher-container{
+    width: 800px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.video-title{
+    margin-bottom: 5px;
+}
+.pub-date{
+    color: #555;
+}
+.video-content{
+    margin: 15px 50px;
+}
+.channel-title{
+    font-weight: 500;
+    margin: 5px 0;
+}
+.video-desc{
+    font-size: 14px;
+    line-height: 18px;
+}

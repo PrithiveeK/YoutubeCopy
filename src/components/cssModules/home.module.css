@@ -1,0 +1,50 @@
+.load{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 5px;
+}
+.loader{
+    display: none;
+    height: 100%;
+    background-color: red;
+    width: 100%;    
+    transform-origin: left;
+    -webkit-transform-origin: left;
+    transform: scaleX(0.01);
+    -webkit-transform: scaleX(0.01);
+    transition: transform 200ms ease-in;
+    -webkit-transition: transform 200ms ease-in;
+}
+.loading{
+    display: block;
+    animation: loadBar 200ms ease-in-out;
+}
+.loaded{
+    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+}
+.retry-container{
+    width: 100%;
+    height: calc(100% - 100px);
+    position: absolute;
+    display: flex;
+}
+.retry-btn{
+    margin: auto;
+    padding: 5px;
+    font-size: 25px;
+    color: #777;
+    background-color: #99999933;
+    border: 1px solid #888;
+    outline: none;
+}
+@keyframes loadBar{
+    from{
+        transform: scaleX(0.01);
+    }
+    to{
+        transform: scaleX(0.8);
+    }
+}

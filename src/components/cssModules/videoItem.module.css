@@ -1,0 +1,18 @@
+.video-item{
+    margin: 10px 0;
+    cursor: pointer;
+}
+.img-content{
+    float: left;
+    margin-right: 10px;
+    width: 250px;
+}
+.video-desc{
+    color: #555;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.channel-title{
+    color: #777;
+    font-size: 14px;
+}

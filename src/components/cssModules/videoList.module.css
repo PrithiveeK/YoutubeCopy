@@ -1,0 +1,6 @@
+.video-list{
+    display: flex;
+    flex-direction: column;
+    width: min(95%,800px);
+    margin: 30px auto;
+}
