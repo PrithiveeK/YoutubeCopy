@@ -25,7 +25,7 @@ class Home extends Component {
 
     handelSearchQuery = async (query) => {
         this.startLoading();
-        const apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&&type=video';
+        const apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&&type=video&&maxResults=20';
         const queryPram = query ? `&&q=${query.replace(/\ /g,'+')}` : '';
         const key = `&&key=${process.env.REACT_APP_YOUTUBE_API}`;
         const res = await fetch(apiURL+queryPram+key,
