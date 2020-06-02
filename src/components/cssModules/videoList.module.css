@@ -4,3 +4,6 @@
     width: min(95%,800px);
     margin: 30px auto;
 }
+.video-list *::-webkit-scrollbar{
+    display: none;
+}

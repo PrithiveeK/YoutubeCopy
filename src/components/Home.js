@@ -9,10 +9,10 @@ class Home extends Component {
     constructor(props){
         super(props);
         this.state = {
-            q: '',
-            videoList: []
+            q: ''
         }
         this.loadRef = React.createRef();
+        this.retryRef = React.createRef();
     }
     startLoading = () => this.loadRef.current.classList.add(style.loading);
     doneLoading = () => this.loadRef.current.classList.add(style.loaded);
@@ -23,18 +23,8 @@ class Home extends Component {
         },1000);
     }
 
-    handelSearchQuery = async (query) => {
-        this.startLoading();
-        const apiURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&&type=video&&maxResults=20';
-        const queryPram = query ? `&&q=${query.replace(/\ /g,'+')}` : '';
-        const key = `&&key=${process.env.REACT_APP_YOUTUBE_API}`;
-        const res = await fetch(apiURL+queryPram+key,
-        {header: {'Content-Type': 'application/json'}});
-        const result = await res.json();
-        this.doneLoading();
-        this.setState({q: query, videoList: result.items},()=>{
-            this.removeLoader();
-        });
+    handelSearchQuery = (query) => {
+        this.setState({q: query});
     }
     render() {
         return (
@@ -43,14 +33,17 @@ class Home extends Component {
                 <div className={style.load}>
                     <div className={style.loader} ref={this.loadRef}/>
                 </div>
+                
                 <SearchBar searchQuery={this.handelSearchQuery} query={this.state.q}/>
                 <Route exact path='/'>
-                <VideoList videos={this.state.videoList} 
-                loadDefault={this.handelSearchQuery}/>
+                <VideoList query={this.state.q} 
+                loader={[this.startLoading,this.doneLoading,this.removeLoader]}
+                retryer={[this.hideRetry,this.showRetry]}/>
                 </Route>
                 <Route path='/:id' render={(props)=>
                 <WatchVideo {...props}
-                loader={[this.startLoading,this.doneLoading,this.removeLoader]}/>
+                loader={[this.startLoading,this.doneLoading,this.removeLoader]}
+                retryer={[this.hideRetry,this.showRetry]}/>
                 }/>
             </div>
             </HashRouter>

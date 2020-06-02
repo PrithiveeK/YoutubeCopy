@@ -1,6 +1,7 @@
 .video-item{
     margin: 10px 0;
     cursor: pointer;
+    display: flow-root;
 }
 .img-content{
     float: left;

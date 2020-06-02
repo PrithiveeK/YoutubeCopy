@@ -12,18 +12,37 @@ class WatchVideo extends Component {
                 pubDate: ''
             }
         }
+        this.retryRef = React.createRef();
     }
     componentDidMount(){
         this.videoId = this.props.match.params.id;
         this.getVideoDetails();
+        this.hideRetry();
+    }
+    showRetry = () => {
+        this.retryRef.current.style.display = "flex";
+    }
+    hideRetry = () => {
+        this.retryRef.current.style.display = "none";
     }
     getVideoDetails = async () => {
         this.props.loader[0]();
+        this.hideRetry();
         const apiURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet';
         const videoIdPrams = `&&id=${this.videoId}`;
         const key = `&&key=${process.env.REACT_APP_YOUTUBE_API}`;
-        const res = await fetch(apiURL+videoIdPrams+key,
-            {header: {'Content-Type': 'application/json'}});
+        let res;
+        try{
+            res = await fetch(apiURL+videoIdPrams+key,
+                {header: {'Content-Type': 'application/json'}});
+            if(!res.ok)
+            throw Error("error fetching");
+        }catch(err){
+            this.props.loader[1]();
+            this.props.loader[2]();
+            this.showRetry();
+            return;
+        }
         const result = await res.json();
         const data = result.items[0].snippet;
         const date = Date(data.publishedAt).split(' ');
@@ -50,6 +69,10 @@ class WatchVideo extends Component {
                         <p className={style['channel-title']}>{channelName}</p>
                         <p className={style['video-desc']}>{desc}</p>
                     </div>
+                </div>
+                <div className={'retry-container'} ref={this.retryRef}>
+                    <button className={'retry-btn'}
+                    onClick={this.getVideoDetails}>Retry</button>
                 </div>
             </div>
         );
